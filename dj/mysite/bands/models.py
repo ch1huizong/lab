@@ -6,6 +6,9 @@ class Band(models.Model):
     name = models.CharField(max_length=200)
     can_rock = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Member(models.Model):
     """A model of a rock band member."""
@@ -19,3 +22,6 @@ class Member(models.Model):
         max_length=1
     )
     band = models.ForeignKey("Band", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name

@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'polls.apps.PollsConfig',
     'news.apps.NewsConfig',
+    'bands.apps.BandsConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
