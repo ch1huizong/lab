@@ -1,2 +1,6 @@
 # lab
-Some attempts to integrate Scrapy,  Django, REST and React
+
+* Django
+* REST
+* Scrapy
+* Reactjs
