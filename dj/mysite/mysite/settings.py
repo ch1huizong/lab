@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'polls.apps.PollsConfig',
     'news.apps.NewsConfig',
     'bands.apps.BandsConfig',
+    'dms.apps.DmsConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
