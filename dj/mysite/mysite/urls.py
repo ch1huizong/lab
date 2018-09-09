@@ -17,10 +17,16 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+
     path('admin/', admin.site.urls),
+
     path('news/', include('news.urls')),
+
     path('bands/', include('bands.urls')),
+
     #path('polls/', include('polls.urls')),
     path('author-polls/', include('polls.urls', namespace='author-polls')),
     path('publisher-polls/', include('polls.urls', namespace='publisher-polls')),
+
+    path('books/', include('books.urls')),
 ]

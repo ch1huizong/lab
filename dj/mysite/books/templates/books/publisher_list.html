@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>出版社</h2>
+    <ul>
+        {% for publisher in object_list %}
+            <li>{{ publisher.name }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+

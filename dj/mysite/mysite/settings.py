@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'news.apps.NewsConfig',
     'bands.apps.BandsConfig',
     'dms.apps.DmsConfig',
+    'books.apps.BooksConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
