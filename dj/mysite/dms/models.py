@@ -1,5 +1,6 @@
 # -*- coding:UTF-8 -*-
 
+from django.conf import settings
 from django.db import models
 
 
@@ -27,7 +28,11 @@ class Person(models.Model):
 
 class Group(models.Model):
     name = models.CharField(max_length=128)
-    members = models.ManyToManyField(Person, through='Membership')
+    members = models.ManyToManyField(
+        Person, 
+        through='Membership',
+        through_fields=('group', 'person'),
+    )
 
     def __str__(self):
         return self.name
@@ -36,8 +41,27 @@ class Group(models.Model):
 class Membership(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    inviter = models.ForeignKey(
+        Person,
+        on_delete=models.CASCADE,
+        related_name='Membership_invites',
+    )
     date_joined = models.DateField()
     invite_reason = models.CharField(max_length=64)
+
+
+#o2o
+class MySpecialUser(models.Model):
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+    supervisor = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='supervisor_of',
+    )
+
 
 # field, choices
 class Student(models.Model):
@@ -60,3 +84,25 @@ class Student(models.Model):
     def is_upperclass(self):
         return self.year_in_school in (self.JUNIOR, self.SENIOR)
 
+
+# RELATION EXAMPLES
+# m2m
+class Publication(models.Model):
+    title = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ('title',)
+
+
+class Article(models.Model):
+    headline = models.CharField(max_length=100)
+    publications = models.ManyToManyField(Publication)
+
+    def __str__(self):
+        return self.headline
+
+    class Meta:
+        ordering = ('headline',)
