@@ -1,10 +1,10 @@
 # -*- coding:UTF-8 -*-
-
 import logging
 from scrapy import signals
 from scrapy.exceptions import NotConfigured
 
 logger = logging.getLogger(__name__)
+
 
 class SpiderOpenCloseLogging(object):
 

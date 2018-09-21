@@ -63,6 +63,10 @@ EXTENSIONS = {
     'scrapy_tutorial.extensions.SpiderOpenCloseLogging': 0,
     'scrapy_jsonrpc.webservice.WebService': 500,
 }
+MYEXT_ENABLED = True
+MYEXT_ITEMCOUNT = 10
+
+CLOSESPIDER_ITEMCOUNT = 15
 
 JSONRPC_ENABLED = True
 JSONRPC_PORT = [9999]
@@ -96,5 +100,3 @@ FEED_URL = 'ftp://ubuntu:123456@192.168.1.3/che/quotes.json'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-MYEXT_ENABLED = True
-MYEXT_ITEMCOUNT = 10
