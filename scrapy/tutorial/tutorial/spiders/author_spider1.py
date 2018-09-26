@@ -13,7 +13,7 @@ class AuthorSpiderCrawlSpider(CrawlSpider):
 
     rules = (
         Rule(LinkExtractor(allow=r'/author/'), callback='parse_author'),
-        Rule(LinkExtractor(allow=r'/page/', deny=r'/tag/'), follow=True),
+        Rule(LinkExtractor(allow=r'/page/', deny=r'/tag/')),
     )
 
 
