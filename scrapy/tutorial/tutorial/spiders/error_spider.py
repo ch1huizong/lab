@@ -1,9 +1,12 @@
 # -*- coding:UTF-8 -*-
+# 自定义errback处理, 因为downloader处理request时会遇到error
+
 import scrapy
 
 from scrapy.spidermiddlewares.httperror import HttpError
 from twisted.internet.error import DNSLookupError
 from twisted.internet.error import TimeoutError, TCPTimedOutError
+
 
 class ErrbackSpider(scrapy.Spider):
     name = "errback"
@@ -21,7 +24,7 @@ class ErrbackSpider(scrapy.Spider):
                     u, 
                     callback=self.parse_httpbin, 
                     errback=self.errback_httpbin, 
-                    dont_filter=True  # 为何要用True?
+                    dont_filter=True  # 出现错误时，有重试
                 )
 
     def parse_httpbin(self, response):
