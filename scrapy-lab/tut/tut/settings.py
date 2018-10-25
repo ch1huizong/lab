@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for tutorial project
+# Scrapy settings for tut project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,14 +9,14 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'tutorial'
+BOT_NAME = 'tut'
 
-SPIDER_MODULES = ['tutorial.spiders']
-NEWSPIDER_MODULE = 'tutorial.spiders'
+SPIDER_MODULES = ['tut.spiders']
+NEWSPIDER_MODULE = 'tut.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'
+#USER_AGENT = 'tut (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -46,46 +46,26 @@ ROBOTSTXT_OBEY = False
 
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
-SPLASH_URL = 'http://127.0.0.1:8050'
-SPIDER_MIDDLEWARES = {
-    'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
-}
-
+#SPIDER_MIDDLEWARES = {
+#    'tut.middlewares.TutSpiderMiddleware': 543,
+#}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-DOWNLOADER_MIDDLEWARES = {
-    'scrapy_splash.SplashCookiesMiddleware': 723,
-    'scrapy_splash.SplashMiddleware': 725,
-    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
-}
-
-DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
-HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
-SPLASH_COOKIES_DEBUG=False
-SPLASH_LOG_400=True
+#DOWNLOADER_MIDDLEWARES = {
+#    'tut.middlewares.TutDownloaderMiddleware': 543,
+#}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
 #EXTENSIONS = {
-    #'scrapy.extensions.telnet.TelnetConsole': None,
-    #'scrapy_tutorial.extensions.SpiderOpenCloseLogging': 0,
-    #'scrapy_jsonrpc.webservice.WebService': 500,
+#    'scrapy.extensions.telnet.TelnetConsole': None,
 #}
-MYEXT_ENABLED = True
-MYEXT_ITEMCOUNT = 10
-
-#CLOSESPIDER_ITEMCOUNT = 15
-
-JSONRPC_ENABLED = True
-JSONRPC_PORT = [9999]
-
-FEED_URL = 'ftp://ubuntu:123456@192.168.1.3/che/quotes.json'
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    'tutorial.pipelines.TutorialPipeline': 300,
+#    'tut.pipelines.TutPipeline': 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -108,4 +88,3 @@ FEED_URL = 'ftp://ubuntu:123456@192.168.1.3/che/quotes.json'
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
-

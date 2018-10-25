@@ -8,7 +8,7 @@
 import scrapy
 
 
-class TutorialItem(scrapy.Item):
-    id = scrapy.Field()
-    name = scrapy.Field()
-    descriptiion = scrapy.Field()
+class TutItem(scrapy.Item):
+    # define the fields for your item here like:
+    # name = scrapy.Field()
+    pass
