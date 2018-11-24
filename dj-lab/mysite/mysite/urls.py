@@ -8,6 +8,7 @@ urlpatterns = [
     path('polls/', include('polls.urls')),
     path('author-polls/', include('polls.urls', namespace='author-polls')),
     path('publisher-polls/', include('polls.urls', namespace='publisher-polls')),
+    path('polls-api/', include('polls_api.urls')),
 
     path('books/', include('books.urls')),
 
