@@ -11,8 +11,8 @@ class BlogSpider(scrapy.Spider):
     ]
 
     def parse(self, response):
-        for title in response.css('div.post-header>h2'):
-            yield {'title': title.css('a ::text').extract_first()}
+        for title in response.css('.post-header>h2'):
+            yield {'title': title.css('a ::text').get()}
 
-        for next_page in response.css('div.blog-pagination > a'):
+        for next_page in response.css('a.next-posts-link'):
             yield response.follow(next_page, self.parse)
