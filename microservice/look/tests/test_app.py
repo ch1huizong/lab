@@ -55,7 +55,7 @@ def test_post_image(client, mock_store):
         headers={'content-type': image_content_type}
     )
 
-    assert response.status == falcon.HTTP_CREATED
+    assert response.status == falcon.HTTP_CREATED  # problem?
     assert response.headers['location'] == '/images/{}'.format(file_name)
     saver_call = mock_store.save.call_args
 

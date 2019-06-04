@@ -25,7 +25,7 @@ def extract_project_id(req, resp, resource, params):
     params['project_id'] = req.get_header('X-PROJECT-ID')
 
 
-@falcon.before(extract_project_id)
+#@falcon.before(extract_project_id)
 class Collection(object):
     
     def __init__(self, image_store):
