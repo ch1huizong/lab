@@ -16,7 +16,7 @@ class AuthorSpider(scrapy.Spider):
 
     def parse_author(self, response):
         def extract_with_css(query):
-            return response.css(query).extract_first().strip()
+            return response.css(query).get(default='').strip()
 
         yield {
             "name": extract_with_css("h3.author-title::text"),
