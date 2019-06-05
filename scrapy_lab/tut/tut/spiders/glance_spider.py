@@ -13,10 +13,10 @@ class QuotesSpider(scrapy.Spider):
     def parse(self, response):
         for quote in response.css('div.quote'):
             yield {
-                'text': quote.css('span.text::text').extract_first(),
-                'author': quote.xpath('span/small/text()').extract_first(),
+                'text': quote.css('span.text::text').get(),
+                'author': quote.xpath('span/small/text()').get(),
             }
 
-        next_page = response.css('li.next a::attr("href")').extract_first()
+        next_page = response.css('li.next a::attr("href")').get()
         if next_page is not None:
-            yield response.follow(next_page, self.parse) # follow
+            yield response.follow(next_page, self.parse)
