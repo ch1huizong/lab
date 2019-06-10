@@ -1,36 +1,31 @@
 # -*- coding: utf-8 -*-
-import re
-
 import scrapy
 from scrapy.loader import ItemLoader
+
 from mtime.items import MtimeItem
+from mtime.loaders import MtimeLoader
 
 
 class Top100Spider(scrapy.Spider):
     name = 'top100'
-    allowed_domains = ['mtime.top']
+    allowed_domains = ['mtime.com']
     start_urls = [
-        "http://www.mtime.com/top/movie/top100/",
+        'http://www.mtime.com/top/movie/top100/',
     ]
 
     def parse(self, response):
-        item = ItemLoader(item=Item(), response=response)
-
         for movie in response.css('div.top_list ul li'):
-            number = movie.css('div.number em::text').get()
-            image_urls = movie.css('div.mov_pic a img::attr(src)').getall()
+            movie_loader = MtimeLoader(item=MtimeItem(), selector=movie)
+            movie_loader.add_css('rank', 'div.number em::text')
+            movie_loader.add_css('image_urls', 'div.mov_pic a img::attr(src)')
+            movie_loader.add_css('title', 'div.mov_con h2 a::text')
+            movie_loader.add_xpath('director', 'p[contains(., "导演")]/a/text()')
+            movie_loader.add_xpath('actors', 'p[contains(., "主演")]/a/text()')
+            movie_loader.add_xpath('categories', 'p[contains(., "类型")]//a/text()')
+            movie_loader.add_css('description','div.mov_con p.mt3::text')
+            movie_loader.add_css('points', 'div.mov_point b.point span::text')
+            movie_loader.add_css('comments', 'div.mov_point b.point + p::text')
+            yield movie_loader.load_item()
 
-            title = movie.css('div.mov_con h2 a::text').get()
-            year = title
-            director = movie.css('div.mov_con').xpath('p[contains(.,$d)]',
-                    d=u'导演').xpath('a/text()').extract()
-            actors = movie.css('div.mov_con').xpath('p[contains(.,$a)]',
-                    a=u'主演').xpath('a/text()').extract()
-            categories = movie.css('div.mov_con').xpath('p[contains(.,$c)]',
-                    c=u'类型').xpath('.//a/text()').extract()
-            description = movie.css('div.mov_con p.mt3::text').extract_first()
-            point = movie.css('div.mov_point b.point span::text').extract()
-            comments = movie.css('div.mov_point b.point + p::text').re_first(r'(\d+).*')
-            yield MtimeItem(number=number, image_urls=image_urls, title=title, year=year,
-                director=director, actors=actors, categories=categories,
-                description=description, point=point, comments=comments)
+        for next_page in response.css('div#PageNavigator a.num'):
+            yield response.follow(next_page, callback=self.parse)

@@ -9,7 +9,7 @@ from mtime.items import MtimeItem
 
 
 class Top100Spider(CrawlSpider):
-    name = 'top100'
+    name = 'top1000'
     allowed_domains = ['mtime.com']
     start_urls = ['http://www.mtime.com/top/movie/top100']
 

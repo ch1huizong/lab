@@ -17,9 +17,10 @@ NEWSPIDER_MODULE = 'mtime.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'mtime (+http://www.yourdomain.com)'
+USER_AGENT = 'Mozilla/5.0 (X11; Linux i686; rv:45.0) Gecko/20100101 Firefox/45.0'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -67,6 +68,16 @@ ROBOTSTXT_OBEY = True
 #ITEM_PIPELINES = {
 #    'mtime.pipelines.MtimePipeline': 300,
 #}
+ITEM_PIPELINES = {
+    'mtime.pipelines.MtimePipeline': 1,
+    'mtime.pipelines.CleanPipeline': 5,
+}
+IMAGES_STORE = '/tmp/images'
+
+IMAGES_THUMBS = {
+    'small': (50, 50),
+    'big': (105, 110),
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -88,3 +99,5 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+EDITOR = 'vim'
