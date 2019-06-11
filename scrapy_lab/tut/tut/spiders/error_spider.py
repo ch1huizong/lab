@@ -24,7 +24,7 @@ class ErrbackSpider(scrapy.Spider):
                 u,
                 callback=self.parse_httpbin,
                 errback=self.errback_httpbin,
-                dont_filter=True,  # 出现错误时，有重试
+                dont_filter=True,  # 因为scrapy出现错误会重试, 所以有必要？ 
             )
 
     def parse_httpbin(self, response):
