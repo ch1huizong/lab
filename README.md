@@ -1,7 +1,7 @@
 # lab
 
 ## 项目组成
-    * django_ lab
+    * django lab
     * spiders lab 
     * 微服务(falcon)
 
